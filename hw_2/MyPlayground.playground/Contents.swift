@@ -10,8 +10,9 @@ for index in 0..<randomNumArray.count {
 var numbSet: Set<Int> = Set()
 var firstRepeatedIndex = -1
 for index in 0..<randomNumArray.count {
-    if (numbSet.contains(randomNumArray[index]) && firstRepeatedIndex == -1) {
+    if (numbSet.contains(randomNumArray[index])) {
         firstRepeatedIndex = index
+        break
     } else {
         numbSet.insert(randomNumArray[index])
     }
