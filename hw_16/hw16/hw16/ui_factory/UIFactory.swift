@@ -2,7 +2,7 @@
 //  UIFactory.swift
 //  hw16
 //
-//  Created by Nur-Magomed Arsakhanov on 27.02.2025.
+//  Created by Nur-Magomed on 27.02.2025.
 //
 
 import UIKit
