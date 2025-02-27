@@ -11,7 +11,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+      
+        // Singleton check
+        var myCache = AppCache.instance
+        print(myCache.get(key: "one") ?? "empty")
+        myCache.set(key: "one", value: "numberOne")
+        print(myCache.get(key: "one") ?? "empty")
+        
+        IPadUIFactory().createButton(name: "Hello, World!")
+        IPhoneUIFactory().createButton(name: "Hello, World!")
+        MacBookUIFactory().createButton(name: "Hello, World!")
     }
 
 
