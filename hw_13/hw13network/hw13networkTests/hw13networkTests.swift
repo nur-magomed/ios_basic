@@ -2,7 +2,7 @@
 //  hw13networkTests.swift
 //  hw13networkTests
 //
-//  Created by Nur-Magomed Arsakhanov on 01.03.2025.
+//  Created by Nur-Magomed A on 01.03.2025.
 //
 
 import Testing

@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  hw13network
 //
-//  Created by Nur-Magomed Arsakhanov on 01.03.2025.
+//  Created by Nur-Magomed A on 01.03.2025.
 //
 
 import UIKit
