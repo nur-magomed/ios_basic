@@ -127,12 +127,21 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6m-6v-wTa">
-                                <rect key="frame" x="16" y="735" width="361" height="35"/>
+                                <rect key="frame" x="16" y="713" width="361" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Copy address"/>
                                 <connections>
                                     <action selector="onClickCopyBtn:" destination="XNq-V7-Ind" eventType="touchUpInside" id="jMN-F7-dAY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgQ-Op-jN3">
+                                <rect key="frame" x="16" y="756" width="361" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Test app crash"/>
+                                <connections>
+                                    <action selector="onClickTestAppCrash:" destination="XNq-V7-Ind" eventType="touchUpInside" id="njP-85-ZwQ"/>
                                 </connections>
                             </button>
                         </subviews>
