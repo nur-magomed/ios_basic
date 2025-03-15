@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCrashlytics
+import FirebaseAnalytics
 
 class UserDetailsViewController: UIViewController {
     
@@ -34,6 +37,7 @@ class UserDetailsViewController: UIViewController {
     
     
     @IBAction func onClickNameToggle(_ sender: UISegmentedControl) {
+        Analytics.logEvent("clicked_name_toggle", parameters: ["user" : "\(user?.firstName ?? "default user")"])
         if (sender.selectedSegmentIndex == 0) {
             userNameLabel.text = user?.firstName
         } else if (sender.selectedSegmentIndex == 1) {
@@ -43,7 +47,18 @@ class UserDetailsViewController: UIViewController {
     
     
     @IBAction func onClickCopyBtn(_ sender: UIButton) {
+        Crashlytics.crashlytics().log("clicked on copy address")
+        Analytics.logEvent("copied_address", parameters: ["user" : "\(user?.firstName ?? "default user")"])
         UIPasteboard.general.string = userAddressLabel.text
+    }
+    
+    
+    @IBAction func onClickTestAppCrash(_ sender: Any) {
+        Crashlytics.crashlytics().log("user \(user?.firstName ?? "default user") crashed the app")
+        Analytics.logEvent("crashing_app", parameters: ["user" : "\(user?.firstName ?? "default user")"])
+        
+        let numbers = [0]
+        let _ = numbers[1]
     }
     
 }
