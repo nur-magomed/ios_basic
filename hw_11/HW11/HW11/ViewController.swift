@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  HW11
 //
-//  Created by Nur-Magomed Arsakhanov on 25.01.2025.
+//  Created by Nur-Magomed A on 25.01.2025.
 //
 
 import UIKit
@@ -56,11 +56,12 @@ class ViewController: UIViewController {
     
     private var imageYcenterLandscape: NSLayoutConstraint?
     private var imageLeadingAnchorLandscape: NSLayoutConstraint?
-    private var firstLabelLeadingAnchorLandscape: NSLayoutConstraint?
     private var firstLabelYcenterLandscape: NSLayoutConstraint?
     private var secondLabelLeadingAnchorLandscape: NSLayoutConstraint?
     private var secondLabelYcenterLandscape: NSLayoutConstraint?
     private var secondLabelTrailingAnchorLandscape: NSLayoutConstraint?
+    private var firstLabelLeadingAnchorLandscape: NSLayoutConstraint?
+    private var secondLabelLeadinAnchorLandscape: NSLayoutConstraint?
     
     private var landscapeSpacingWidth: CGFloat = 0
     
@@ -74,8 +75,15 @@ class ViewController: UIViewController {
         childView.addSubview(image)
         childView.addSubview(firstLabel)
         childView.addSubview(secondLabel)
-        imageXcenterPortrait = image.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
-        imageYcenterPortrait = image.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: view.frame.height/10 * -1)
+        childView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        childView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        childView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        childView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        image.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        imageXcenterPortrait = image.centerXAnchor.constraint(equalTo: childView.centerXAnchor, constant: 0)
+        imageYcenterPortrait = image.centerYAnchor.constraint(equalTo: childView.centerYAnchor, constant: view.frame.height/10 * -1)
         bottomImagePortrait = image.bottomAnchor.constraint(lessThanOrEqualTo: firstLabel.topAnchor, constant: -10)
         firstLabelXcenterPortrait = firstLabel.centerXAnchor.constraint(equalTo: childView.centerXAnchor, constant: 0)
         secondLabelXcenterPortrait = secondLabel.centerXAnchor.constraint(equalToSystemSpacingAfter: childView.centerXAnchor, multiplier: 1)
@@ -88,38 +96,36 @@ class ViewController: UIViewController {
         secondLabelYcenterLandscape = secondLabel.centerYAnchor.constraint(equalTo: childView.centerYAnchor, constant: 0)
 
         secondLabelTrailingAnchorLandscape = secondLabel.trailingAnchor.constraint(equalTo: childView.trailingAnchor, constant: -20)
-        
-//        topImage = image.topAnchor.constraint(equalTo: childView.centerYAnchor, constant: view.frame.height/10 * -1)
-//        topImage?.priority = .init(999)
-//        bottomImage?.priority = .init(1000)
+        firstLabelLeadingAnchorLandscape = firstLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 70)
+        secondLabelLeadinAnchorLandscape = secondLabel.leadingAnchor.constraint(equalTo: firstLabel.trailingAnchor, constant: 70)
         
         createPortraitConstraints()
     }
 
     
     func createPortraitConstraints() {
+        print(landscapeSpacingWidth)
+        NSLayoutConstraint.deactivate([
+            imageYcenterLandscape!,
+            imageLeadingAnchorLandscape!,
+            secondLabelTrailingAnchorLandscape!,
+
+            firstLabelLeadingAnchorLandscape!,
+            secondLabelLeadinAnchorLandscape!,
+            firstLabelYcenterLandscape!,
+            secondLabelYcenterLandscape!,
+            
+        ])
+        
         NSLayoutConstraint.activate([
-            image.widthAnchor.constraint(equalToConstant: 50),
-            image.heightAnchor.constraint(equalToConstant: 50),
             imageXcenterPortrait!,
             imageYcenterPortrait!,
             bottomImagePortrait!,
             firstLabelXcenterPortrait!,
             secondLabelXcenterPortrait!,
             secondLabelYcenterPortrait!,
-            
-            childView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            childView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            childView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            childView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-//            topImage!,
-//            bottomImage!
         ])
-        NSLayoutConstraint.deactivate([
 
-            
-        ])
     }
     
     func createLandscapeConstraints() {
@@ -138,8 +144,8 @@ class ViewController: UIViewController {
             imageLeadingAnchorLandscape!,
             secondLabelTrailingAnchorLandscape!,
 
-            firstLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: landscapeSpacingWidth),
-            secondLabel.leadingAnchor.constraint(equalTo: firstLabel.trailingAnchor, constant: landscapeSpacingWidth),
+            firstLabelLeadingAnchorLandscape!,
+            secondLabelLeadinAnchorLandscape!,
             firstLabelYcenterLandscape!,
             secondLabelYcenterLandscape!,
         ])
@@ -149,29 +155,13 @@ class ViewController: UIViewController {
     func rotated() {
         if UIDevice.current.orientation.isLandscape {
             print("Landscape")
-            print(childView.frame.width)
-            print(image.frame.width)
-            print(firstLabel.frame.width)
-            print(secondLabel.frame.width)
-            landscapeSpacingWidth = (childView.frame.width - image.frame.width - firstLabel.frame.width - secondLabel.frame.width - 40) / 2
-            print(landscapeSpacingWidth)
-            
-           
             createLandscapeConstraints()
-          
-            
         }
 
         if UIDevice.current.orientation.isPortrait {
             print("Portrait")
             createPortraitConstraints()
         }
-    }
-    
-    func deactivateConstraints() {
-        firstLabel.constraints.forEach { $0.isActive = false }
-        secondLabel.constraints.forEach { $0.isActive = false }
-        image.constraints.forEach { $0.isActive = false }
     }
 
 }

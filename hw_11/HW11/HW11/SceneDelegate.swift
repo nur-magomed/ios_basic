@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  HW11
 //
-//  Created by Nur-Magomed Arsakhanov on 25.01.2025.
+//  Created by Nur-Magomed A on 25.01.2025.
 //
 
 import UIKit
